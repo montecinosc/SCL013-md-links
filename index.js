@@ -5,19 +5,19 @@
 const fs = require('fs');
 const  jsdom  =  require ( "jsdom" ) ; 
 const  {  JSDOM  }  =  jsdom ;
-const ruta = __dirname;
+const path = __dirname;
+const pathNode = require('path');
 
+// Aroja solo files .md
+fs.readdir(path, (error, files) => {
+  files.forEach(file => {
+  if (file.includes(".md")) {
+  console.log("files", file)
 
-//Aroja solo archivos .md
-fs.readdir(ruta, (error, archivos) => {
-  archivos.forEach(archivo => {
-  if (archivo.includes(".md")) {
-  console.log("archivos", archivo)
-
-//Lectura RaedMe markdown 
+// Lectura RaedMe markdown 
 fs.readFile('README.md','utf8', (err, data)=> {
     if(err){
-        console.log("NOO un archivo .md")
+        console.log("Don´t file .md")
     }else
     {
         //console.log(data.toString())
@@ -33,20 +33,27 @@ fs.readFile('README.md','utf8', (err, data)=> {
   const myHtml = html;
   //console.log(myHtml)
 
-  //Leer el archivo HTML y sacar text, link y file
-  const rutaDos = `${ruta}/${archivo}`;
+  //Leer el file HTML y sacar text, link y file
+  const pathTwo = `${path}${pathNode.sep}${file}`;
   const dom = new JSDOM(myHtml);
   const test = dom.window.document.querySelectorAll('a');
+  let add = 0;
   test.forEach(element => {
+  addTotal = add + 1
   console.log("----------------------")
   console.log(element.textContent)
   console.log(element.href)
-  console.log(rutaDos)
+  console.log(pathTwo)
+
 
 });
-  
+console.log("suma total", suma)
   });
 }
 })
 })
-  console.log("esta es la ruta", ruta)
+  console.log("esta es la path", path)
+  
+
+  
+  
