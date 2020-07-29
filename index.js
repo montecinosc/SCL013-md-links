@@ -12,11 +12,12 @@ const pathNode = require('path');
 
 const showdown = require('showdown');
 
+const index = () => {
 // Aroja solo files .md
-fs.readdir(path, (error, files) => {
-  files.forEach((file) => {
-    if (file.includes('.md')) {
-      console.log('files', file);
+  fs.readdir(path, (error, files) => {
+    files.forEach((file) => {
+      if (file.includes('.md')) {
+        console.log('files', file);  
 
       // Lectura RaedMe markdown;
       fs.readFile('README.md', 'utf8', (err, data) => {
@@ -52,3 +53,6 @@ fs.readdir(path, (error, files) => {
   });
 });
 console.log('esta es la path', path);
+};
+
+module.exports = {index};
