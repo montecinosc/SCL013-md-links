@@ -12,6 +12,12 @@ const pathNode = require('path');
 
 const showdown = require('showdown');
 
+const fetch = require('fetch');
+
+const fetchUrl = fetch.fetchUrl;
+
+const colors = require('colors');
+
 const index = () => {
 // Aroja solo files .md
   fs.readdir(path, (error, files) => {
@@ -20,20 +26,42 @@ const index = () => {
         console.log('files', file);  
 
       // Lectura RaedMe markdown;
-      fs.readFile('README.md', 'utf8', (err, data) => {
+      fs.readFile(file, 'utf8', (err, data) => {
         if (err) {
           console.log('Don´t file .md');
         } else {
           // console.log(data.toString());
         }
         // Convertir Markdown a HTML;
-        const converter = new showdown.Converter();
         const text = data.toString();
+        const converter = new showdown.Converter();
         const html = converter.makeHtml(text);
 
         // Pasa el ReadMe a HTML;
         const myHtml = html;
-        // console.log(myHtml);
+        console.log(myHtml);
+        const obtenerEstado = (url) => {
+          return new Promise((resolve, reject) => {
+            fetchUrl(url, (error, meta) => {
+              if (error) {
+                reject(error);
+              } else {
+                resolve(meta.status);
+                // console.log(meta)
+              }
+            })
+          })
+        };
+
+        //Truncar texto
+        const truncateTo50 = (text) => {
+          if (text.length > 50) {
+            const text50 = text.slice(0, 50);
+            return text50;
+          } else {
+            return text;
+          }
+        }
 
         // Leer el file HTML y sacar text, link y file;
         const pathTwo = `${path}${pathNode.sep}${file}`;
@@ -41,11 +69,29 @@ const index = () => {
         const test = dom.window.document.querySelectorAll('a');
         let addTotal = 0;
         test.forEach((element) => {
-          addTotal = 1 + addTotal;
-          console.log('----------------------');
-          console.log(element.textContent);
-          console.log(element.href);
-          console.log(pathTwo);
+          if (element.href.includes('http')){
+            addTotal = 1 + addTotal;
+            const link = element.href;
+            const textContent = element.textContent;
+            const caracter50= truncateTo50(textContent)
+
+            obtenerEstado(link)
+            .then(res => {
+              console.log('----------'.blue);
+              console.log('text:'.blue, caracter50);
+              console.log('href:'.blue, link);
+              console.log('file:'.blue, pathTwo);
+              console.log('OK ✔'.green, res);
+            })
+            .catch(err => {
+              console.log('----------'.red);
+              console.log('text:'.red, caracter50);
+              console.log('href:'.red, link);
+              console.log('file:'.red, pathTwo);
+              console.log('error X'.red, err.code, 'error');
+            })
+          }
+
         });
         console.log('suma total', addTotal);
       });
