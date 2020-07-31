@@ -40,7 +40,7 @@ const index = () => {
         // Pasa el ReadMe a HTML;
         const myHtml = html;
         console.log(myHtml);
-        const obtenerEstado = (url) => {
+        const getStatus= (url) => {
           return new Promise((resolve, reject) => {
             fetchUrl(url, (error, meta) => {
               if (error) {
@@ -54,7 +54,7 @@ const index = () => {
         };
 
         //Truncar texto
-        const truncateTo50 = (text) => {
+        const only50Caracteres = (text) => {
           if (text.length > 50) {
             const text50 = text.slice(0, 50);
             return text50;
@@ -73,9 +73,9 @@ const index = () => {
             addTotal = 1 + addTotal;
             const link = element.href;
             const textContent = element.textContent;
-            const caracter50= truncateTo50(textContent)
+            const caracter50= only50Caracteres(textContent)
 
-            obtenerEstado(link)
+            getStatus(link)
             .then(res => {
               console.log('----------'.blue);
               console.log('text:'.blue, caracter50);
