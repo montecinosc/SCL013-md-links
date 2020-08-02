@@ -59,8 +59,7 @@ const index = (fileIndex) => {
               if (text.length > 50) {
                 const textFifty = text.slice(0, 50);
                 return textFifty;
-              } else 
-              {
+              } else {
                 return text;
               }
             };
