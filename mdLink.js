@@ -1,3 +1,5 @@
 const index = require("./index.js")
 
-index.index();
+const fileIndex = process.argv;
+
+index.index(fileIndex)
