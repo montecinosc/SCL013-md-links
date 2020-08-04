@@ -48,7 +48,7 @@ const index = (fileIndex) => {
 
             // Pasa el ReadMe a HTML;
             const myHtml = html;
-            //console.log(myHtml);
+            // console.log(myHtml);
             const getStatus = (url) => {
               return new Promise((resolve, reject) => {
                 fetchUrl(url, (error, meta) => {
