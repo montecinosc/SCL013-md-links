@@ -19,7 +19,15 @@ const fetchUrl = fetch.fetchUrl;
 const colors = require('colors');
 
 const index = (fileIndex) => {
-  const prueba = () => {
+  console.log("Esto es lo que recibe", fileIndex)
+
+  let validate = false;
+  let stats = false;
+
+validate = fileIndex.includes("--validate");
+stats = fileIndex.includes("--stats");
+
+  const prueba = (condition) => {
     // Aroja solo files .md
     fs.readdir(path, (error, files) => {
       files.forEach((file) => {
@@ -40,7 +48,7 @@ const index = (fileIndex) => {
 
             // Pasa el ReadMe a HTML;
             const myHtml = html;
-            console.log(myHtml);
+          //console.log(myHtml);
             const getStatus = (url) => {
               return new Promise((resolve, reject) => {
                 fetchUrl(url, (error, meta) => {
@@ -75,7 +83,8 @@ const index = (fileIndex) => {
                 const link = element.href;
                 const textContent = element.textContent;
                 const caracter50 = truncateText(textContent);
-
+               
+                if(condition === "--validate"){
                 getStatus(link)
                   .then((res) => {
                     console.log('----------'.blue);
@@ -85,34 +94,50 @@ const index = (fileIndex) => {
                     console.log('OK ✔'.green, res);
                   })
                   .catch(() => {
+                    console.log("este es mi", addBroken)
                     console.log('----------'.red);
                     console.log('text:'.red, caracter50);
                     console.log('href:'.red, link);
                     console.log('file:'.red, pathTwo);
                     console.log('error X'.red, err.code, 'error');
                   });
+                };
               }
             });
-            console.log('suma total', addTotal);
+            if(condition === "--stats"){
+              console.log('suma total', addTotal);
+            } else (condition === "--validate --stats")
+            console.log('Cantidad Link', addTotal);
           });
         }
       });
     });
     console.log('esta es la path', path);
   };
-  if (fileIndex === '--validate') {
+  if (validate === true  && stats === false) {
     console.log('esta validando');
-    prueba(fileIndex);
-  } else if (fileIndex === '--state') {
-    prueba(fileIndex);
+    const valor = "--validate"
+    prueba(valor);
+  } else if (stats === true && validate === false) {
     console.log('estadistica');
-  } else {
-    console.log('Mal escrito,vuelve a escribir');
+    const estadistica = "--stats"
+    prueba(estadistica);
+  }else if(validate === true && stats === true){
+   console.log("funciona??")
+   const ambos = "--validate --stats"
+   prueba(ambos)
+  }else {
+    console.log('Para ver validación incorpore --validate');
+    console.log('Para ver estadistica incorpore --stats');
   }
-  console.log('salio de la condicion');
+
+
+
+  //console.log('salio de la condicion');
 
   // Aroja solo files .md
-  console.log('esta es la path', path);
+  //console.log('esta es la path', path);
+
 };
 
 module.exports = {
