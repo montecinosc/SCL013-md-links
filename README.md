@@ -28,7 +28,7 @@ Estos archivos suelen contener links los cuales en ocasiones pueden estar rotos 
 
 ## Pasos a seguir
 
-1.- Instalar libreria
+1.- Instalar librería
 
 npm i md-links-life
 
@@ -44,7 +44,7 @@ node index.js
 
 * Para ver si los link funcionan debes validarlos, para ello incorporar `--validate`: 
 
-![--validate](http://imgfz.com/i/tCSExTn.png)
+![--validate](http://imgfz.com/i/0j62DfM.png)
 
 * Para ver las estadísticas de tus link debes incorporar `--stats` : 
 
