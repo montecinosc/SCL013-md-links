@@ -1,6 +1,6 @@
 {
   "name": "md-links-life",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "boxen": "^4.2.0",
     "colors": "^1.4.0",
@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lilibeth-Gaete/SCL013-md-links.git"
+    "url": "git+https://github.com/montecinosc/SCL013-md-links"
   },
   "keywords": [
     "node",
@@ -36,7 +36,7 @@
   "author": "Lilibeth Gaete y Fernanda Montecinos",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Lilibeth-Gaete/SCL013-md-links/issues"
+    "url": "https://github.com/montecinosc/SCL013-md-links"
   },
-  "homepage": "https://github.com/Lilibeth-Gaete/SCL013-md-links#readme"
+  "homepage": "https://github.com/montecinosc/SCL013-md-links"
 }
