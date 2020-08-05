@@ -16,7 +16,7 @@ Estos archivos suelen contener links los cuales en ocasiones pueden estar rotos 
 
 ## 2. Diagrama de Flujo 
 
-![Diagrama de Flujo](http://imgfz.com/i/aFLSNtj.jpeg)
+![Diagrama de Flujo](http://imgfz.com/i/JI3Xaos.png)
 
 ## 3. Instalación librería.
 
@@ -24,6 +24,7 @@ Estos archivos suelen contener links los cuales en ocasiones pueden estar rotos 
 
 - Node.js
 - npm
+
 
 ## Pasos a seguir
 
@@ -35,19 +36,24 @@ npm i md-links-life
 
 const mdLink = require("md-links-life")
 
+3- En la terminal llamamos a 
+
+node index.js 
+
 3- Ejecutar comandos 
 
 * Para ver si los link funcionan debes validarlos, para ello incorporar `--validate`: 
 
-![--validate](http://imgfz.com/i/fDdAuve.png)
+![--validate](http://imgfz.com/i/tCSExTn.png)
 
 * Para ver las estadísticas de tus link debes incorporar `--stats` : 
 
-![--stats](http://imgfz.com/i/M1aTCiF.png)
+![--stats](http://imgfz.com/i/0vZ1Kuc.png)
 
 * Al incorporar `--stats` y `--validate` se obtienen estadísticas de la validación.
 
-![--validateStats](http://imgfz.com/i/MxdTvRy.png)
+![--validateStats](http://imgfz.com/i/tCSExTn.png)
+
 
 
 
