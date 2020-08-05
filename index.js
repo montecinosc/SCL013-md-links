@@ -12,27 +12,23 @@ const pathNode = require('path');
 
 const showdown = require('showdown');
 
-const fetch = require('fetch');
-
-const fetchUrl = fetch.fetchUrl;
+const fetchUrl = require('fetch').fetchUrl;
 
 const colors = require('colors');
 
 const index = (fileIndex) => {
-  console.log("Esto es lo que recibe", fileIndex)
-
   let validate = false;
   let stats = false;
 
-  validate = fileIndex.includes("--validate");
-  stats = fileIndex.includes("--stats");
+  validate = fileIndex.includes('--validate');
+  stats = fileIndex.includes('--stats');
 
   const prueba = (condition) => {
     // Aroja solo files .md
     fs.readdir(path, (error, files) => {
       files.forEach((file) => {
         if (file.includes('.md')) {
-          console.log('files', file);
+          // console.log('files', file);
 
           // Lectura RaedMe markdown;
           fs.readFile(file, 'utf8', (err, data) => {
@@ -48,15 +44,31 @@ const index = (fileIndex) => {
 
             // Pasa el ReadMe a HTML;
             const myHtml = html;
-            // console.log(myHtml);
+            //  console.log(myHtml);
             const getStatus = (url) => {
               return new Promise((resolve, reject) => {
-                fetchUrl(url, (error, meta) => {
+                fetchUrl(url, (error, meta, body) => {
                   if (error) {
-                    reject(error);
+                    if (error.code === 'ENOTFOUND') {
+                      //  console.log(error);
+                      reject(400);
+                    }
                   } else {
                     resolve(meta.status);
                     // console.log(meta)
+                  }
+                });
+              });
+            };
+            const getErrores = (url) => {
+              return new Promise((resolve, reject) => {
+                fetchUrl(url, (error, meta, body) => {
+                  if (error) {
+                    if (error.code) {
+                      resolve(400);
+                    }
+                  } else {
+                    reject(meta.status);
                   }
                 });
               });
@@ -71,20 +83,24 @@ const index = (fileIndex) => {
                 return text;
               }
             };
-
             // Leer el file HTML y sacar text, link y file;
             const pathTwo = `${path}${pathNode.sep}${file}`;
             const dom = new JSDOM(myHtml);
             const test = dom.window.document.querySelectorAll('a');
             let addTotal = 0;
+            let arregloLink = [];
+            let unique = [];
             test.forEach((element) => {
               if (element.href.includes('http')) {
                 addTotal = 1 + addTotal;
                 const link = element.href;
                 const textContent = element.textContent;
                 const caracter50 = truncateText(textContent);
+                arregloLink.push(link);
+                unique = [...new Set(arregloLink.map((element) => element))].length;
 
-                if (condition === "--validate") {
+                // condicion para ingresar a la validacion
+                if (condition === '--validate') {
                   getStatus(link)
                     .then((res) => {
                       console.log('----------'.blue);
@@ -93,53 +109,61 @@ const index = (fileIndex) => {
                       console.log('file:'.blue, pathTwo);
                       console.log('OK ✔'.green, res);
                     })
-                    .catch(() => {
-                      console.log("este es mi", addBroken)
+                    .catch((err) => {
                       console.log('----------'.red);
                       console.log('text:'.red, caracter50);
                       console.log('href:'.red, link);
                       console.log('file:'.red, pathTwo);
-                      console.log('error X'.red, err.code, 'error');
+                      console.log('error X'.red, err, 'error');
                     });
-                };
+                }
               }
             });
-            if (condition === "--stats") {
-              console.log('suma total', addTotal);
-            } else(condition === "--validate --stats")
-            console.log('Cantidad Link', addTotal);
+            // condicion para ingresar a las estadisticas
+            if (condition === '--stats') {
+              console.log('Total:', addTotal);
+              console.log("Unique:", unique);
+              console.log("----------------------".rainbow)
+            }
+            // condicion para mostrar la validacion y estadisticas
+            if (condition === '--validate --stats') {
+              console.log('Total:'.blue, addTotal);
+              console.log("Unique".blue, unique);
+              Promise.all(arregloLink.map(urls => getErrores(urls).catch(error => garbage(error))))
+                .then(result => {
+                  if (result.filter(Boolean)) {
+                    console.log("Broken:".blue, result.filter(Boolean).length);
+                    console.log("----------------------".rainbow)
+                  }
+                })
+            }
           });
         }
       });
     });
-    console.log('esta es la path', path);
   };
   if (validate === true && stats === false) {
-    console.log('esta validando');
-    const valor = "--validate"
+    console.log('Validate'.bold);
+    const valor = '--validate';
     prueba(valor);
   } else if (stats === true && validate === false) {
-    console.log('estadistica');
-    const estadistica = "--stats"
+    console.log('Stats'.bold);
+    const estadistica = '--stats';
     prueba(estadistica);
   } else if (validate === true && stats === true) {
-    console.log("funciona??")
-    const ambos = "--validate --stats"
-    prueba(ambos)
+    console.log('Validate and Stats'.bold);
+    const ambos = '--validate --stats';
+    prueba(ambos);
   } else {
+    console.log("Do you need a Help".yellow.bold)
     console.log('Para ver validación incorpore --validate');
     console.log('Para ver estadistica incorpore --stats');
   }
-
-
-
-  //console.log('salio de la condicion');
-
-  // Aroja solo files .md
-  //console.log('esta es la path', path);
-
 };
 
+const garbage = (error) => {
+  let pruebaDos = error;
+}
 module.exports = {
   index,
 };
