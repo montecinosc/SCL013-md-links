@@ -1,5 +1,5 @@
 {
-  "name": "md-links/life",
+  "name": "md-links-life",
   "version": "0.0.1",
   "dependencies": {
     "boxen": "^4.2.0",
