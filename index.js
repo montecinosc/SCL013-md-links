@@ -127,12 +127,12 @@ const index = (fileIndex) => {
             }
             // condicion para mostrar la validacion y estadisticas
             if (condition === '--validate --stats') {
-              console.log('Total:'.blue, addTotal);
-              console.log("Unique".blue, unique);
+              console.log('Total:', addTotal);
+              console.log("Unique", unique);
               Promise.all(arregloLink.map(urls => getErrores(urls).catch(error => garbage(error))))
                 .then(result => {
                   if (result.filter(Boolean)) {
-                    console.log("Broken:".blue, result.filter(Boolean).length);
+                    console.log("Broken:", result.filter(Boolean).length);
                     console.log("----------------------".rainbow)
                   }
                 })
