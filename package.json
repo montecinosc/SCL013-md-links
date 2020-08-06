@@ -1,6 +1,6 @@
 {
-  "name": "md-links/life",
-  "version": "0.0.1",
+  "name": "md-links-life",
+  "version": "0.0.3",
   "dependencies": {
     "boxen": "^4.2.0",
     "colors": "^1.4.0",
@@ -12,7 +12,7 @@
     "showdown": "^1.9.1"
   },
   "description": "* [1. Preámbulo](#1-preámbulo)\r * [2. Resumen del proyecto](#2-resumen-del-proyecto)\r * [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)\r * [4. Consideraciones generales](#4-consideraciones-generales)\r * [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)\r * [6. Entregables](#6-entregables)\r * [7. Hacker edition](#7-hacker-edition)\r * [8. Pistas, tips y lecturas complementarias](#8-pistas-tips-y-lecturas-complementarias)\r * [9. Checklist](#9-checklist)",
-  "main": "index.js",
+  "main": "mdLink.js",
   "directories": {
     "test": "test"
   },
@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lilibeth-Gaete/SCL013-md-links.git"
+    "url": "git+https://github.com/montecinosc/SCL013-md-links.git"
   },
   "keywords": [
     "node",
@@ -36,7 +36,7 @@
   "author": "Lilibeth Gaete y Fernanda Montecinos",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Lilibeth-Gaete/SCL013-md-links/issues"
+    "url": "https://github.com/montecinosc/SCL013-md-links"
   },
-  "homepage": "https://github.com/Lilibeth-Gaete/SCL013-md-links#readme"
+  "homepage": "https://github.com/montecinosc/SCL013-md-links"
 }
