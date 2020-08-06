@@ -14,7 +14,7 @@ Markdown es un lenguaje de marcado muy popular en plataformas que manejan texto 
 
 Estos archivos suelen contener links los cuales en ocasiones pueden estar rotos o ser no válidos, es por ello que como desarrolladoras se nos pidio crear una librería la cual permitiera leer los archivos markdown como por ejemplo un README.md y verificar sus link, para de esta forma validarlos y ver la cantidad de ellos que contiene el directorio. 
 
-## 2. Diagrama de Flujo 
+## 2. Diagrama de Flujo :straight_ruler: 
 
 ![Diagrama de Flujo](http://imgfz.com/i/JI3Xaos.png)
 
@@ -26,7 +26,7 @@ Estos archivos suelen contener links los cuales en ocasiones pueden estar rotos 
 - npm
 
 
-## Pasos a seguir
+## Pasos a seguir :memo: 
 
 1.- Instalar librería
 
@@ -40,7 +40,7 @@ const mdLink = require("md-links-life")
 
 node index.js 
 
-3- Ejecutar comandos 
+## 4- Ejecutar comandos 
 * Luego de incorporar la libreria a tu proyecto , tienes que escribir en consola 
   node index.js `--validate` , el cual te enviara la validacion de los link que se encuentran en tu README.md,el cual puede lanzar 400(error) y 200(ok):
 
@@ -54,14 +54,14 @@ node index.js
 
 ![--validateStats](http://imgfz.com/i/tCSExTn.png)
 
-4-Construido con :star: 
+## 5-Construido con :star: 
 
-*colors
-*jsdom
-*showdown
+* colors
+* jsdom
+* showdown
 
-5-Autores md-link-life :pencil2:
+## 6-Autores md-link-life :pencil2:
 
-*Lilibeth Gaete
-*Fernanda Montecinos
+* Lilibeth Gaete
+* Fernanda Montecinos
 
